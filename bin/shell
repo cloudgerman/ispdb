@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+BIN=$(dirname -- $(readlink -f -- $0))
+
+zsh -c ". $BIN/venv; ZDOTDIR=$BIN zsh -i"

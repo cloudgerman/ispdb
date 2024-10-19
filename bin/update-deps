@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+BIN=$(dirname -- $(readlink -f -- $0))
+
+. $BIN/venv
+
+echo "${BOLD}Installing python dependencies${NORMAL}"
+
+python3 -m pip install --upgrade pip
+python3 -m pip install -e ".[dev]"

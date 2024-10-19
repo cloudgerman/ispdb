@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+who=$(whoami)
+if [[ "$who" == "root" ]]; then
+  echo "ERROR: you can't activate the environment as root"
+  return
+fi
+
+BOLD=$(tput bold)
+NORMAL=$(tput sgr0)
+
+BIN=$(dirname -- $(readlink -f -- $0))
+echo "BIN: $BIN"
+
+VENV="./.$(basename $(dirname $BIN))"
+echo "VENV: $VENV"
+
+OS=$(uname -o)
+echo "OS: $OS"
+
+if [ ! -d $VENV ]; then
+  echo "${BOLD}Creating virtual env${NORMAL}"
+  python3 -m venv $VENV
+fi
+
+echo "${BOLD}Activating virtual env${NORMAL}"
+source $VENV/bin/activate
